@@ -147,12 +147,14 @@
         <div class="loading-text">Generando PDF, por favor espere...</div>
     </div>
 </div>
-    <script src="src/component/javascript/mandamientoDePago.js"></script>
-    <script src="src/component/javascript/formularioMandamiedoPago.js"></script>
+    <!-- jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <script>
+    <!-- TUS ARCHIVOS (en este orden CRÍTICO) -->
+    <script src="src/component/javascript/pdf-utils.js"></script>           <!-- 1. Primero las funciones compartidas -->
+    <script src="src/component/javascript/InicioOTMIPUMP.js"></script>          <!-- 2. Luego Mandamiento -->
+    <script src="src/component/javascript/CitacionOTMIPUMP.js"></script>     <!-- 3. Luego Citación -->
+    <script src="src/component/javascript/notifications.js"></script>        <!-- 4. Por último el control -->
         
-    </script>
-    
 </body>
 </html>
