@@ -199,6 +199,7 @@ input[type="number"].error:focus {
    =================================== */
 button[type="button"],
 button[type="submit"],
+
 .btn,
 .toggle-btn {
   padding: var(--spacing-sm) var(--spacing-lg);
@@ -497,3 +498,271 @@ footer p {
 .mb-2 { margin-bottom: var(--spacing-sm); }
 .mb-3 { margin-bottom: var(--spacing-md); }
 .mb-4 { margin-bottom: var(--spacing-lg); }
+
+
+
+
+/* Estilos para la vista previa de vigencias antiguas */
+
+.vista-previa-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.lista-vigencias h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #3498db;
+}
+
+.sin-datos {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    border: 2px dashed #bdc3c7;
+}
+
+.vigencia-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vigencia-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.vigencia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.vigencia-header h4 {
+    color: #2980b9;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.btn-eliminar {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-eliminar:hover {
+    background: #c0392b;
+}
+
+.vigencia-detalles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.detalle-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.detalle-item.subtotal {
+    background: #d5e8f7;
+    font-weight: 600;
+}
+
+.detalle-item.total {
+    background: #b8e6b8;
+    font-weight: bold;
+    grid-column: 1 / -1;
+    font-size: 1.1rem;
+}
+
+.detalle-item .label {
+    color: #555;
+    font-weight: 500;
+}
+
+.detalle-item .valor {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .vigencia-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .vigencia-detalles {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Estilos para la vista previa de vigencias */
+
+.vista-previa-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.lista-vigencias h3 {
+    color: #2c3e50;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.sin-datos {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    border: 2px dashed #bdc3c7;
+}
+
+.vigencia-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 5px solid #95a5a6;
+}
+
+.vigencia-card.vigencia-actual {
+    border-left: 5px solid #3498db;
+    background: linear-gradient(135deg, #ffffff 0%, #e8f4f8 100%);
+}
+
+.vigencia-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.vigencia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.vigencia-header h4 {
+    color: #2980b9;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.btn-eliminar {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-eliminar:hover {
+    background: #c0392b;
+}
+
+.btn-editar {
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-editar:hover {
+    background: #e67e22;
+}
+
+.vigencia-detalles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.detalle-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.detalle-item.subtotal {
+    background: #d5e8f7;
+    font-weight: 600;
+}
+
+.detalle-item.total {
+    background: #b8e6b8;
+    font-weight: bold;
+    grid-column: 1 / -1;
+    font-size: 1.1rem;
+}
+
+.detalle-item .label {
+    color: #555;
+    font-weight: 500;
+}
+
+.detalle-item .valor {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .vigencia-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .vigencia-detalles {
+        grid-template-columns: 1fr;
+    }
+}

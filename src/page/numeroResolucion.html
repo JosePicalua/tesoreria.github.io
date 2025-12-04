@@ -62,7 +62,7 @@
     </form> 
 
     <div class="totalprecioUnificadoAntiguo">
-        <input type="number" id="totalprecioUnificadoAntiguo" placeholder="Suma Total"  value="">
+        <input type="number" id="totalprecioUnificadoAntiguo" placeholder="Suma Total"  value="" readonly>
     </di>
 
     <div class="container">
@@ -83,7 +83,7 @@
             <form action="añosdeVigenciaPredial" id="formVigenciaActual">
                 <div>
                     <label for="añoPredialFactura">Digite Años de Factura del Predio</label>
-                    <input type="text" id="añoPredialFactura" placeholder="Digite Años de Factura del Predio" value="ACTUAL">
+                    <input type="text" id="añoPredialFactura" placeholder="Digite Años de Factura del Predio" value="ACTUAL" readonly>
                 </div>
 
                 <table id="conceptoVigenciaActual" border="1">
@@ -143,6 +143,12 @@
         </div>
     </div>
 
+    <div class="vista-previa-container">
+        <div id="listaVigenciasAntiguas" class="lista-vigencias">
+            <p class="sin-datos">No hay vigencias antiguas agregadas</p>
+        </div>
+    </div>
+
     
 
 
@@ -150,5 +156,10 @@
     <footer>
         <p>&copy; 2024 - 2027 Alcaldía de El Banco Magdalena (Tesoreria)</p>
     </footer>
+
+    <script src="./javacritp/numeroResolucion.js"></script>
+
+    
 </body>
+
 </html>
