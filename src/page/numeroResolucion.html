@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Número de Resolución Pos Persuacivo</title>
     <link rel="stylesheet" href="./css/numeroResolucion.css">
+
+    <style>
+
+
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -13,7 +21,7 @@
 
                 <div class="form-section">
                     <label for="fechaResolucion">Fecha de Resolución</label>
-                    <input type="text" id="fechaResolucion" placeholder="Fecha del dia que genera la Resoklucion" required>
+                    <input type="date" id="fechaResolucion" placeholder="Fecha del dia que genera la Resolucion" required>
                     <span class="error-message" id="fechaResolucion">Fecha de Resolución</span>
                 </div>
 
@@ -48,22 +56,17 @@
                 </div>
 
                 <div class="form-section">
-                    <label for="numeroFcactura">Numero de Factura del Predio</label>
-                    <input type="text" id="numeroFcactura" placeholder="Numero de Factura del Predio" required>
-                    <span class="error-message" id="numeroFcactura">Numero de Factura del Predio</span>
+                    <label for="numeroFactura">Numero de Factura del Predio</label>
+                    <input type="text" id="numeroFactura" placeholder="Numero de Factura del Predio" required>
+                    <span class="error-message" id="numeroFactura">Numero de Factura del Predio</span>
                 </div>
-
-                <div class="form-section">
-                    <label for="totalFactura">Total Unificado del Parecio del Predio</label>
-                    <input type="text" id="totalFactura" placeholder="Total Unificado del Parecio del Predio" required>
-                    <span class="error-message" id="totalFactura">Total Unificado del Parecio del Predio</span>
-                </div>                
+           
             </div>
     </form> 
 
-    <div class="totalprecioUnificadoAntiguo">
-        <input type="number" id="totalprecioUnificadoAntiguo" placeholder="Suma Total"  value="" readonly>
-    </di>
+    <input type="hidden" id="totalFactura" value="">
+    <input type="hidden" id="totalFacturaLetras" value="">
+
 
     <div class="container">
         <!-- Botones de toggle -->
@@ -143,10 +146,21 @@
         </div>
     </div>
 
+
+    <div class="totalprecioUnificadoAntiguo">
+        <input type="text" id="totalprecioUnificadoAntiguo" placeholder="Suma Total" readonly>
+        <input type="text" id="totalprecioUnificadoAntiguoLetras" placeholder="Total en letras" readonly>
+    </div>
+    
+    
     <div class="vista-previa-container">
         <div id="listaVigenciasAntiguas" class="lista-vigencias">
             <p class="sin-datos">No hay vigencias antiguas agregadas</p>
         </div>
+    </div>
+
+    <div class="contenedor-boton">
+        <button class="btn" id="btnGenerarPdf" onclick="generarPdfResolucion()">Generar PDF</button>
     </div>
 
     
@@ -158,8 +172,8 @@
     </footer>
 
     <script src="./javacritp/numeroResolucion.js"></script>
+    <script src="./javacritp/pdfResolucion.js"></script>
 
-    
 </body>
 
 </html>

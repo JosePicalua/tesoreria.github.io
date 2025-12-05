@@ -194,6 +194,17 @@ input[type="number"].error:focus {
   }
 }
 
+/* CONTENEDOR PARA CENTRAR */
+.contenedor-boton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+
+
 /* ===================================
    BOTONES
    =================================== */
@@ -257,12 +268,42 @@ button[type="submit"]:hover {
   background-color: #15803d;
 }
 
-.buttons {
-  display: flex;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
+
+input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+
+    background-color: #f8f8f8;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    color: #333;
 }
 
+/* Efecto al hacer clic */
+input[type="date"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* Quitar icono nativo en algunos navegadores (si molesta) */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(30%);
+}
+
+
+.buttons_
+{
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+}
 /* ===================================
    BOTONES TOGGLE
    =================================== */
