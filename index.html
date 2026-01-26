@@ -14,10 +14,10 @@
     <div class="container">
         <div class="header">
             <h1>📋 Sistema de Seguimiento de Resoluciones</h1>
-            <p>Gestión Progresiva de Datos de Resoluciones y Embargos</p>
+            <p>Actualización Automática del CSV - Sin Descargas</p>
         </div>
 
-        <div style="margin-bottom: 20px;">
+        <div style="padding: 20px;">
             <button id="toggleMainBtn" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.2rem;" onclick="toggleApp()">
                 ➕ Agregar Titular
             </button>
@@ -28,7 +28,7 @@
                 <div id="message" class="message"></div>
 
                 <div class="form-section">
-                    <h2>➕ Agregar Nuevo Registro (Datos Básicos)</h2>
+                    <h2>➕ Agregar Nuevo Registro</h2>
                     <form id="basicForm">
                         <div class="form-grid">
                             <div class="form-group">
@@ -62,14 +62,25 @@
                         </div>
 
                         <div class="button-group">
-                            <button type="submit" class="btn btn-primary">💾 Guardar Registro Básico</button>
+                            <button type="submit" class="btn btn-primary">💾 Guardar Registro</button>
                             <button type="button" class="btn btn-secondary" onclick="clearBasicForm()">🔄 Limpiar</button>
-                            <button type="button" class="btn btn-success" onclick="downloadExcel()">📥 Descargar Excel</button>
+                        </div>
+                        
+                        <div style="margin-top: 15px; padding: 12px; background: #e7f3ff; border-radius: 8px; border-left: 4px solid #2196F3;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #1976D2;">
+                                <strong>⚡ Sistema Automático:</strong>
+                            </p>
+                            <ul style="margin: 8px 0 0 0; padding-left: 20px; font-size: 0.85rem; color: #1976D2;">
+                                <li>Primera vez: El navegador te pedirá acceso a la carpeta del proyecto</li>
+                                <li>Selecciona la carpeta raíz que contiene <code>plantillaSeguimiento/</code></li>
+                                <li>Todos los cambios se guardan automáticamente en el CSV</li>
+                                <li>No hay descargas ni copias - Todo es automático ✨</li>
+                            </ul>
                         </div>
                     </form>
                 </div>
 
-                <div class="table-section">
+                <div class="table-section" style="display: none;">
                     <h2>📊 Registros en Seguimiento</h2>
                     <div class="table-container">
                         <table>
@@ -98,6 +109,65 @@
         </div>
     </div>
 
+    <!-- Modal para completar información -->
+    <div id="completeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="color: #667eea; margin-bottom: 20px;">➕ Completar Información Adicional</h2>
+            
+            <form id="completeForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Resolución COC Tributario:</label>
+                        <input type="text" id="modal_resolucioncOCTributario">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Resolución COC Tributario:</label>
+                        <input type="date" id="modal_fechaResolucionCOCTributario">
+                    </div>
+                    <div class="form-group">
+                        <label>Resolución OTMIPUMP:</label>
+                        <input type="text" id="modal_resolucionOTMIPUMP">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Resolución OTMIPUMP:</label>
+                        <input type="date" id="modal_fechaResolucionOTMIPUMP">
+                    </div>
+                    <div class="form-group">
+                        <label>Resolución Medida Cautelar:</label>
+                        <input type="text" id="modal_resolucionMedidaCautera">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Resolución Med. Cautelar:</label>
+                        <input type="date" id="modal_fechaResolucionMedidaCautera">
+                    </div>
+                    <div class="form-group">
+                        <label>Resolución Embargo:</label>
+                        <input type="text" id="modal_resolucionEmbargo">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Resolución Embargo:</label>
+                        <input type="date" id="modal_fechaResolucionEmbargo">
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Observaciones:</label>
+                        <textarea id="modal_observaciones" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">💾 Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">❌ Cancelar</button>
+                </div>
+
+                <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 6px; border-left: 4px solid #ffc107;">
+                    <p style="margin: 0; font-size: 0.85rem; color: #856404;">
+                        <strong>⚠️ Nota:</strong> Los campos con información existente están bloqueados para preservar los datos.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="container">
         <div class="header">

@@ -71,7 +71,6 @@ const { jsPDF } = window.jspdf;
             const numeroDocumento = formatearNumeroDocumento(document.getElementById('numeroDocumento').value) || '___';
             const nombreTitular = document.getElementById('nombreTitular').value || '___';
             const totalEmbargo = formatearTotalEmbargo(document.getElementById('totalEmbargo').value.replace(/\./g, '')) || '___';
-            const fechaGeneradoDocumento = formatearFechaCompleta(document.getElementById('fechaGeneradoDocumento').value) || '___';
                         // TEXTOS PREDETERMINADOS CON REEMPLAZOS
             const TITULO = `RESOLUCIÓN ${numeroResolucion} DEL ${fechaResolucion}`;
             
@@ -101,7 +100,7 @@ const { jsPDF } = window.jspdf;
 
             const TEXTO12 = `COMUNÍQUESE, NOTIFÍQUESE Y CÚMPLASE.`;
 
-            const TEXTO13 = `Dado en El Banco, Magdalena, a los ${fechaGeneradoDocumento}.`;
+            const TEXTO13 = `Dado en El Banco, Magdalena, a los ${fechaResolucion}.`;
 
             const ATENTAMENTE = `ATENTAMENTE`;
 
@@ -118,7 +117,6 @@ const { jsPDF } = window.jspdf;
                 nombreTitular,
                 numeroDocumento,
                 totalEmbargo,
-                fechaGeneradoDocumento
             ];
 
             function debeSerNegrita(palabra) {

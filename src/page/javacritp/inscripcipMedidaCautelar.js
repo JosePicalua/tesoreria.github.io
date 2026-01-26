@@ -69,7 +69,6 @@ const { jsPDF } = window.jspdf;
             const numeroMatriculaInmobilaria = document.getElementById('numeroMatriculaInmobilaria').value || '___';
             const cedulaCatastral = document.getElementById('cedulaCatastral').value || '___';
             const direcciondelPredio = document.getElementById('direcciondelPredio').value || '___';
-            const fechaGeneradoDocumento = formatearFechaCompleta(document.getElementById('fechaGeneradoDocumento').value) || '___';
                         // TEXTOS PREDETERMINADOS CON REEMPLAZOS
             // Este es un documento DIFERENTE - es una SOLICITUD, no una RESOLUCIÓN
             // Debería ir en una nueva sección o función separada
@@ -84,7 +83,7 @@ const { jsPDF } = window.jspdf;
 
             const ASUNTO = `ASUNTO: SOLICITUD DE INSCRIPCIÓN DE MEDIDA CAUTELAR DE EMBARGO SOBRE BIEN INMUEBLE – PROCESO DE COBRO COACTIVO POR IMPUESTO PREDIAL UNIFICADO.`;
 
-            const CUERPO_SOLICITUD = `En mi calidad de Tesorero Municipal de El Banco, Magdalena, actuando como funcionario ejecutor dentro del proceso administrativo de cobro coactivo, y en ejercicio de las facultades conferidas, Estatuto Tributario Municipal de El Banco, Estatuto Tributario Nacional y normas concordantes, respetuosamente me permito SOLICITAR la inscripción de la medida cautelar de EMBARGO decretada mediante Resolución No ${numeroResolucionCoactivo} de fecha ${fechaGeneradoDocumento}, proferida dentro del proceso de cobro coactivo que se adelanta contra del Contribuyente: ${nombreTitular} (identificado/a), con cédula de ciudadanía Nº ${numeroDocumento}, al inmueble identificado con matrícula inmobiliaria Nº 224-${numeroMatriculaInmobilaria}, cédula Catastral Nº ${cedulaCatastral}, ubicado en la dirección ${direcciondelPredio}.`;
+            const CUERPO_SOLICITUD = `En mi calidad de Tesorero Municipal de El Banco, Magdalena, actuando como funcionario ejecutor dentro del proceso administrativo de cobro coactivo, y en ejercicio de las facultades conferidas, Estatuto Tributario Municipal de El Banco, Estatuto Tributario Nacional y normas concordantes, respetuosamente me permito SOLICITAR la inscripción de la medida cautelar de EMBARGO decretada mediante Resolución No ${numeroResolucionCoactivo} de fecha ${fechaResolucion}, proferida dentro del proceso de cobro coactivo que se adelanta contra del Contribuyente: ${nombreTitular} (identificado/a), con cédula de ciudadanía Nº ${numeroDocumento}, al inmueble identificado con matrícula inmobiliaria Nº 224-${numeroMatriculaInmobilaria}, cédula Catastral Nº ${cedulaCatastral}, ubicado en la dirección ${direcciondelPredio}.`;
 
             const FUNDAMENTO_LEGAL = `La medida cautelar se decreta como garantía del crédito fiscal correspondiente a obligaciones insolutas por concepto de Impuesto Predial Unificado, intereses y sanciones, conforme a lo dispuesto en: Artículos 823, 824, 825, 828, 829 y 837 del Estatuto Tributario Nacional, normas pertinentes establecidas en el Estatuto Tributario Municipal de El Banco, Magdalena.`;
 
@@ -106,7 +105,6 @@ const { jsPDF } = window.jspdf;
                 numeroResolucionCoactivo,
                 nombreTitular,
                 numeroDocumento,
-                fechaGeneradoDocumento
             ];
 
             const palabrasNegrita = [
