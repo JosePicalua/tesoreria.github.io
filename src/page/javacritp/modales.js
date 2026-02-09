@@ -393,7 +393,50 @@ function openModalMedidaCautelar() {
 }
 
 
+function exportToExcel() {
+    const records = JSON.parse(localStorage.getItem('registrosCobranza') || '[]');
+    
+    if (records.length === 0) {
+        alert('No hay registros para exportar');
+        return;
+    }
+
+    // Preparar datos para Excel
+    const excelData = records.map(record => ({
+        'Nombre Titular': record.nombreTitular || '',
+        'Número Documento': record.numeroDocumento || '',
+        'Número Inmobiliaria': record.numeroInmobiliaria || '',
+        'Dirección Propiedad': record.direccionPropiedad || '',
+        'Total Endeudamiento': record.totalEndeudamiento || '',
+        'Oficio Resolución Persuasión': record.oficioResolucionPersuacion || '',
+        'Fecha Oficio Res. Persuasión': record.fechaOficioResolucionPersuacsion || '',
+        'Oficio Coactivo': record.oficioCoactivo || '',
+        'Fecha Oficio Coactivo': record.fechaOficioCoactivo || '',
+        'Mandamiento Pago': record.mandamientoPago || '',
+        'Fecha Mandamiento Pago': record.fechaMandamientoPago || '',
+        'Embargo': record.embargo || '',
+        'Fecha Embargo': record.fechaEmbargo || '',
+        'Remate': record.remate || '',
+        'Fecha Remate': record.fechaRemate || ''
+    }));
+
+    // Crear hoja de cálculo
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Seguimiento Cobranza");
+
+    // Generar nombre de archivo con fecha
+    const fecha = new Date().toISOString().split('T')[0];
+    const filename = `Seguimiento_Cobranza_${fecha}.xlsx`;
+
+    // Descargar archivo
+    XLSX.writeFile(wb, filename);
+}
+
+
 function closeModal() {
     const modal = document.getElementById("modalOverlay");
     if (modal) modal.remove();
 }
+
+
