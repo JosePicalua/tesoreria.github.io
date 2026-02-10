@@ -2,19 +2,27 @@ let data = [];
 let editingIndex = -1;
 const CSV_PATH = 'plantillaSeguimiento/detallesUsuario.csv';
 
-// ========== CONFIGURACIÓN GITHUB ==========
+// ========== CONFIGURACIÓN GITHUB (SEGURA) ==========
 const GITHUB_CONFIG = {
-    owner: 'JosePicalua',  // Tu usuario de GitHub
-    repo: 'tesoreria.github.io',  // Nombre de tu repositorio
-    branch: 'main',  // Rama principal
-    token: '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',
-    filePath: 'plantillaSeguimiento/detallesUsuario.csv'
+    owner: 'JosePicalua',
+    repo: 'tesoreria.github.io',
+    branch: 'main',
+    filePath: 'plantillaSeguimiento/detallesUsuario.csv',
+    // Seguridad: Lee el token del navegador, no del código
+    getToken: () => localStorage.getItem('gh_token_tesoreria')
 };
 
 // ========== GUARDAR EN GITHUB AUTOMÁTICAMENTE ==========
 async function saveToGitHub() {
     try {
         showMessage('⏳ Guardando en GitHub...', 'info');
+
+        // Verificar que hay token disponible
+        const token = GITHUB_CONFIG.getToken();
+        if (!token) {
+            showMessage('⚠️ Token de GitHub no configurado. Guardado solo local.', 'warning');
+            return false;
+        }
 
         // 1. Generar CSV
         const headers = [
@@ -53,7 +61,7 @@ async function saveToGitHub() {
         
         const getResponse = await fetch(getFileUrl, {
             headers: {
-                'Authorization': `token ${GITHUB_CONFIG.token}`,
+                'Authorization': `token ${GITHUB_CONFIG.getToken()}`, // Nota: ahora es una función
                 'Accept': 'application/vnd.github.v3+json'
             }
         });
@@ -80,7 +88,7 @@ async function saveToGitHub() {
         const updateResponse = await fetch(updateUrl, {
             method: 'PUT',
             headers: {
-                'Authorization': `token ${GITHUB_CONFIG.token}`,
+                'Authorization': `token ${GITHUB_CONFIG.getToken()}`, // Nota: ahora es una función
                 'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json'
             },
@@ -502,3 +510,33 @@ function showMessage(text, type) {
         }, 5000);
     }
 }
+
+// ========== VERIFICACIÓN DE TOKEN AL CARGAR ==========
+// Este bloque verifica si existe el token al cargar la página
+window.addEventListener('load', () => {
+    const token = GITHUB_CONFIG.getToken();
+    
+    if (!token) {
+        // Mostrar un mensaje inicial
+        showMessage('⚠️ Configuración requerida para sincronización con GitHub', 'warning');
+        
+        // Pedir el token después de un breve delay
+        setTimeout(() => {
+            const userToken = prompt(
+                "🔑 Configuración Tesorería\n\n" +
+                "Para habilitar el guardado automático en GitHub, pega tu Personal Access Token:\n\n" +
+                "(Formato: ghp_...)\n\n" +
+                "Si no tienes uno, presiona Cancelar para trabajar solo localmente."
+            );
+            
+            if (userToken && userToken.trim()) {
+                localStorage.setItem('gh_token_tesoreria', userToken.trim());
+                showMessage('✅ Token guardado. Sincronización con GitHub habilitada.', 'success');
+            } else {
+                showMessage('ℹ️ Trabajando en modo local. Los datos se guardarán solo en tu navegador.', 'info');
+            }
+        }, 1000);
+    } else {
+        showMessage('✅ Sincronización con GitHub activa', 'success');
+    }
+});
