@@ -695,6 +695,33 @@ function renderFilteredTable(filteredData, searchTerm) {
             // Si no hay fecha válida, usar el estilo por defecto según completitud
             tr.className = isComplete ? 'status-complete' : 'status-incomplete';
         }
+
+        // ===== RESALTAR NÚMERO DE DOCUMENTO =====
+        const docOriginal = String(row.numeroDocumento || '');
+        const normalizedDoc = docOriginal.replace(/\D/g, '');
+        const normalizedSearch = searchTerm.replace(/\D/g, '');
+
+        let highlightedDoc = docOriginal;
+
+        if (normalizedSearch && normalizedDoc.includes(normalizedSearch)) {
+            let index = normalizedDoc.indexOf(normalizedSearch);
+            let count = 0;
+            highlightedDoc = '';
+
+            for (let char of docOriginal) {
+                if (/\d/.test(char)) {
+                    if (count >= index && count < index + normalizedSearch.length) {
+                        highlightedDoc += `<mark>${char}</mark>`;
+                    } else {
+                        highlightedDoc += char;
+                    }
+                    count++;
+                } else {
+                    highlightedDoc += char;
+                }
+            }
+        }
+
         
         tr.innerHTML = `
             <td>
