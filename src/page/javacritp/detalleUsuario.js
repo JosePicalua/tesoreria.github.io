@@ -511,6 +511,164 @@ function showMessage(text, type) {
     }
 }
 
+// ========== BÚSQUEDA POR NÚMERO DE DOCUMENTO CON FORMATO AUTOMÁTICO ==========
+let currentSearchTerm = '';
+
+function formatAndFilterDocument(input) {
+    // Guardar la posición del cursor
+    const cursorPosition = input.selectionStart;
+    const previousLength = input.value.length;
+    
+    // Obtener solo los números (eliminar puntos y otros caracteres)
+    let numbers = input.value.replace(/\D/g, '');
+    
+    // Formatear con puntos cada 3 dígitos
+    let formatted = '';
+    for (let i = 0; i < numbers.length; i++) {
+        if (i > 0 && i % 3 === 0) {
+            formatted = '.' + formatted;
+        }
+        formatted = numbers[numbers.length - 1 - i] + formatted;
+    }
+    
+    // Actualizar el valor del input
+    input.value = formatted;
+    
+    // Ajustar la posición del cursor
+    const newLength = formatted.length;
+    const diff = newLength - previousLength;
+    input.setSelectionRange(cursorPosition + diff, cursorPosition + diff);
+    
+    // Realizar la búsqueda
+    filterByDocument();
+}
+
+function filterByDocument() {
+    const searchInput = document.getElementById('searchDocument');
+    const searchTerm = searchInput.value.trim();
+    
+    currentSearchTerm = searchTerm;
+    
+    if (searchTerm === '') {
+        // Si no hay búsqueda, mostrar todos los registros
+        renderTable();
+        hideSearchInfo();
+        return;
+    }
+    
+    // Filtrar registros que contengan el término de búsqueda
+    // Normalizar: quitar puntos, comas y espacios para la comparación
+    const normalizedSearch = searchTerm.replace(/[.,\s]/g, '');
+    
+    const filteredData = data.filter(row => {
+        const normalizedDoc = String(row.numeroDocumento || '').replace(/[.,\s]/g, '');
+        return normalizedDoc.includes(normalizedSearch);
+    });
+    
+    // Renderizar solo los resultados filtrados
+    renderFilteredTable(filteredData, searchTerm);
+    showSearchInfo(filteredData.length, searchTerm);
+}
+
+function renderFilteredTable(filteredData, searchTerm) {
+    const tbody = document.getElementById('tableBody');
+    const tableSection = document.querySelector('.table-section');
+    const noResults = document.getElementById('noResults');
+    
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+
+    if (filteredData.length === 0) {
+        if (noResults) {
+            noResults.style.display = 'block';
+        }
+        return;
+    }
+
+    if (noResults) {
+        noResults.style.display = 'none';
+    }
+
+    if (tableSection) {
+        tableSection.style.display = 'block';
+    }
+
+    filteredData.forEach((row) => {
+        // Encontrar el índice original en el array principal
+        const originalIndex = data.indexOf(row);
+        
+        const isComplete = row.resolucioncOCTributario || row.resolucionOTMIPUMP || 
+                          row.resolucionMedidaCautera || row.resolucionEmbargo;
+        
+        const tr = document.createElement('tr');
+        tr.className = isComplete ? 'status-complete' : 'status-incomplete';
+        
+        // Resaltar el número de documento que coincide
+        let highlightedDoc = row.numeroDocumento;
+        if (searchTerm) {
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            highlightedDoc = String(row.numeroDocumento).replace(regex, '<mark>$1</mark>');
+        }
+        
+        tr.innerHTML = `
+            <td>
+                ${isComplete ? 
+                    '<span class="badge badge-success">✓ Completo</span>' : 
+                    '<span class="badge badge-warning">⚠ Básico</span>'}
+            </td>
+            <td><strong>${row.nombreTitular}</strong></td>
+            <td>${highlightedDoc}</td>
+            <td>${row.numeroInmobiliaria || '-'}</td>
+            <td>${row.direccionPropiedad || '-'}</td>
+            <td>${row.totalEndeudamiento ? '$' + parseFloat(row.totalEndeudamiento).toLocaleString('es-CO') : '-'}</td>
+            <td>${row.oficioResolucionPersuacion || '-'}</td>
+            <td>${row.fechaOficioResolucionPersuacion || '-'}</td>
+            <td>${row.resolucioncOCTributario ? '✓' : '-'}</td>
+            <td>${row.resolucionOTMIPUMP ? '✓' : '-'}</td>
+            <td>${row.resolucionMedidaCautera ? '✓' : '-'}</td>
+            <td>${row.resolucionEmbargo ? '✓' : '-'}</td>
+            <td>
+                <button class="btn-complete" onclick="completeData(${originalIndex})">➕ Completar</button>
+                <button class="btn-delete" onclick="deleteRow(${originalIndex})">🗑️</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function showSearchInfo(count, searchTerm) {
+    const resultsInfo = document.getElementById('resultsInfo');
+    const resultsCount = document.getElementById('resultsCount');
+    
+    if (resultsInfo && resultsCount) {
+        resultsInfo.style.display = 'block';
+        resultsCount.textContent = `📋 Se encontraron ${count} registro(s) con "${searchTerm}"`;
+    }
+}
+
+function hideSearchInfo() {
+    const resultsInfo = document.getElementById('resultsInfo');
+    const noResults = document.getElementById('noResults');
+    
+    if (resultsInfo) {
+        resultsInfo.style.display = 'none';
+    }
+    if (noResults) {
+        noResults.style.display = 'none';
+    }
+}
+
+function clearSearch() {
+    const searchInput = document.getElementById('searchDocument');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    currentSearchTerm = '';
+    renderTable();
+    hideSearchInfo();
+}
+
 // ========== VERIFICACIÓN DE TOKEN AL CARGAR ==========
 // Este bloque verifica si existe el token al cargar la página
 window.addEventListener('load', () => {

@@ -23,127 +23,82 @@
             </button>
         </div>
 
+     
         <div id="mainContent" style="display: none;">
-            <div class="content">
-                <div id="message" class="message"></div>
+        <div class="content">
+            <div id="message" class="message"></div>
 
-                <div style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #1e5e3f 0%, #2d8a5a 100%); color: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; min-width: 220px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
-                    <div style="background-color: #d1fae5; color: #065f46; padding: 8px 15px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">
-                        💰 Total Cartera
-                    </div>
-                    <div id="totalCartera" style="font-size: 2rem; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        $0.00
-                    </div>
+            <div style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #1e5e3f 0%, #2d8a5a 100%); color: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; min-width: 220px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="background-color: #d1fae5; color: #065f46; padding: 8px 15px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">
+                    💰 Total Cartera
                 </div>
+                <div id="totalCartera" style="font-size: 2rem; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    $0.00
+                </div>
+            </div>
 
-                <div class="form-section">
-                    <h2>➕ Agregar Nuevo Registro</h2>
-                    <form id="basicForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Oficio Resolución Persuasión:</label>
-                                <input type="text" id="oficioResolucionPersuacion">
-                            </div>
-                            <div class="form-group">
-                                <label>Nombre Titular: *</label>
-                                <input type="text" id="nombreTitular" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Número Documento: *</label>
-                                <input type="text" id="numeroDocumento" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Dirección Propiedad:</label>
-                                <input type="text" id="direccionPropiedad">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Cedula Catastral:</label>
-                                <input type="text" id="numeroInmobiliaria">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Total Endeudamiento:</label>
-                                <input type="number" id="totalEndeudamiento" step="0.01">
-                            </div>
-                            
+            <div class="form-section">
+                <h2>➕ Agregar Nuevo Registro</h2>
+                <form id="basicForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Oficio Resolución Persuasión:</label>
+                            <input type="text" id="oficioResolucionPersuacion">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre Titular: *</label>
+                            <input type="text" id="nombreTitular" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Número Documento: *</label>
+                            <input type="text" id="numeroDocumento" required>
                         </div>
 
-                        <div class="button-group">
-                            <button type="submit" class="btn btn-primary">💾 Guardar Registro</button>
-                            <button type="button" class="btn btn-secondary" onclick="clearBasicForm()">🔄 Limpiar</button>
-                            <button type="button" class="btn btn-success" onclick="exportToExcel()">📊 Explorar Seguimiento</button>
+                        <div class="form-group">
+                            <label>Dirección Propiedad:</label>
+                            <input type="text" id="direccionPropiedad">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cedula Catastral:</label>
+                            <input type="text" id="numeroInmobiliaria">
                         </div>
                         
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label>Total Endeudamiento:</label>
+                            <input type="number" id="totalEndeudamiento" step="0.01">
+                        </div>
+                    </div>
 
-                <style>
-                :root {
-                    /* VARIABLE PARA AJUSTAR EL ALTO: Cámbiala aquí y afectará a toda la tabla */
-                    --tabla-max-height: 500px; 
-                    --verde-equilibrado: #a8d5ba;
-                }
-
-                .table-section {
-                    margin-top: 20px;
-                }
-
-                /* CONTENEDOR CON SCROLL HORIZONTAL Y VERTICAL */
-                .table-container {
-                    width: 100%;
-                    max-height: var(--tabla-max-height); 
-                    overflow-x: auto;  /* Controla el movimiento Izquierda/Derecha */
-                    overflow-y: auto;  /* Controla el movimiento Arriba/Abajo */
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-                    
-                }
-
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    min-width: 1200px; /* Obliga a que aparezca el scroll horizontal si la pantalla es chica */
-                    font-family: sans-serif;
-                    font-size: 0.9rem;
-                }
-
-                thead th {
-                    position: sticky; /* Para que el encabezado no se pierda al bajar */
-                    top: 0;
-                    background-color: var(--verde-equilibrado);
-                    color: #2d4a3e;
-                    padding: 12px;
-                    text-align: left;
-                    white-space: nowrap; /* Evita que los títulos se amontonen en varias líneas */
-                }
-
-                tbody td {
-                    padding: 10px;
-                    border-bottom: 1px solid #eee;
-                    white-space: nowrap; /* Mantiene los datos en una sola línea */
-                }
-
-                /* Estilo opcional para la barra de desplazamiento (más elegante) */
-                .table-container::-webkit-scrollbar {
-                    height: 8px;
-                    width: 8px;
-                }
-                .table-container::-webkit-scrollbar-thumb {
-                    background: #ccc;
-                    border-radius: 4px;
-                }
-                .table {
-                    /* Si ves que las columnas están muy apretadas, aumenta este número (ej. 1500px) */
-                    /* Si quieres que se vea más compacta, disminúyelo (ej. 800px) */
-                    min-width: 1200px; 
-                }
-            </style>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">💾 Guardar Registro</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearBasicForm()">🔄 Limpiar</button>
+                        <button type="button" class="btn btn-success" onclick="exportToCSV()">📊 Exportar CSV</button>
+                    </div>
+                </form>
+            </div>
 
             <div class="table-section">
                 <h2>📊 Registros en Seguimiento</h2>
+                
+                <!-- BUSCADOR DE NÚMEROS DE DOCUMENTO -->
+                <div class="search-container">
+                    <label for="searchDocument">🔍 Buscar por N° Documento:</label>
+                    <input 
+                        type="text" 
+                        id="searchDocument" 
+                        placeholder="Ej: 1217977" 
+                        oninput="formatAndFilterDocument(this)"
+                    >
+                    <button class="btn-clear-search" onclick="clearSearch()">✖ Limpiar</button>
+                </div>
+
+                <!-- INFORMACIÓN DE RESULTADOS -->
+                <div class="results-info" id="resultsInfo" style="display: none;">
+                    <span id="resultsCount"></span>
+                </div>
+
+                <!-- TABLA CON SCROLL -->
                 <div class="table-container">
                     <table>
                         <thead>
@@ -164,10 +119,14 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
-            </div>
+
+                <!-- MENSAJE CUANDO NO HAY RESULTADOS -->
+                <div id="noResults" class="no-results" style="display: none;">
+                    <p>❌ No se encontraron registros con ese número de documento</p>
+                </div>
             </div>
         </div>
     </div>
