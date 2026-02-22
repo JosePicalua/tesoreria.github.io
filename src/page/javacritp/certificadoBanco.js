@@ -584,3 +584,16 @@ document.addEventListener('DOMContentLoaded', function() {
 // Exponer funciones globalmente
 window.previsualizarPDF = previsualizarPDF;
 window.descargarPDFs = descargarPDFs;
+
+function cerrarModal() {
+    try {
+        if (window.parent && window.parent.document) {
+            const modal = window.parent.document.getElementById('modalOverlay');
+            if (modal) modal.remove();
+        }
+    } catch (error) {
+        console.error('Error al cerrar modal:', error);
+    }
+}
+
+window.cerrarModal = cerrarModal;

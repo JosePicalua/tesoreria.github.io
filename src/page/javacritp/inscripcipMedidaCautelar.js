@@ -287,3 +287,16 @@ const { jsPDF } = window.jspdf;
         }, 500);
     }, 100);
             }
+
+function cerrarModal() {
+    try {
+        if (window.parent && window.parent.document) {
+            const modal = window.parent.document.getElementById('modalOverlay');
+            if (modal) modal.remove();
+        }
+    } catch (error) {
+        console.error('Error al cerrar modal:', error);
+    }
+}
+
+window.cerrarModal = cerrarModal;

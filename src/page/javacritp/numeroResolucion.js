@@ -331,3 +331,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hacer que el campo "añoPredialFactura" sea readonly
     document.getElementById('añoPredialFactura').setAttribute('readonly', true);
 });
+
+function cerrarModal() {
+    try {
+        if (window.parent && window.parent.document) {
+            const modal = window.parent.document.getElementById('modalOverlay');
+            if (modal) modal.remove();
+        }
+    } catch (error) {
+        console.error('Error al cerrar modal:', error);
+    }
+}
+
+window.cerrarModal = cerrarModal;

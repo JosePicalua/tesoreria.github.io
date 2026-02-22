@@ -343,3 +343,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 });
+
+function cerrarModal() {
+    try {
+        if (window.parent && window.parent.document) {
+            const modal = window.parent.document.getElementById('modalOverlay');
+            if (modal) modal.remove();
+        }
+    } catch (error) {
+        console.error('Error al cerrar modal:', error);
+    }
+}
+
+window.cerrarModal = cerrarModal;

@@ -429,3 +429,16 @@ document.getElementById('cedula').addEventListener('input', function(e) {
     let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     e.target.value = formatted;
 });
+
+function cerrarModal() {
+    try {
+        if (window.parent && window.parent.document) {
+            const modalPersuasivo = window.parent.document.getElementById('modalOverlay_persuacivo');
+            if (modalPersuasivo) modalPersuasivo.remove();
+        }
+    } catch (error) {
+        console.error('Error al cerrar modal:', error);
+    }
+}
+
+window.cerrarModal = cerrarModal;
