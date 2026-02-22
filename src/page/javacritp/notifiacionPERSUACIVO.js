@@ -430,15 +430,3 @@ document.getElementById('cedula').addEventListener('input', function(e) {
     e.target.value = formatted;
 });
 
-function cerrarModal() {
-    try {
-        if (window.parent && window.parent.document) {
-            const modalPersuasivo = window.parent.document.getElementById('modalPersuasivo');
-            if (modalPersuasivo) modalPersuasivo.remove();
-        }
-    } catch (error) {
-        console.error('Error al cerrar modal:', error);
-    }
-}
-
-window.cerrarModal = cerrarModal;

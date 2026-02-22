@@ -433,9 +433,15 @@ function exportToExcel() {
     XLSX.writeFile(wb, filename);
 }
 
-
 function closeModal() {
-    const modal = document.getElementById("modalOverlay");
+    // Busca el overlay O la resolución
+    const modal = document.getElementById("modalOverlay") || 
+                  document.getElementById("modalCoactivo") ||
+                  document.getElementById("resolucion") ||
+                  document.getElementById("modalPersuasivo") ||
+                  document.getElementById("persuasivo") ||
+                  document.getElementById("coactivo");
+                  
     if (modal) modal.remove();
 }
 
